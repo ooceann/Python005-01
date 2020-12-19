@@ -61,13 +61,10 @@ class DoubanSpider(object):
 
                 for i in range(len(stars_list)):
                     star = stars_list[i].split(' ')[0][7]
+                    # 过滤评分低于3的
                     if int(star) > 3:
-                        item = {}
-                        item['movie_id'] = self.id
-                        item['movie_name'] = movie_name
-                        item['user_name'] = user_names[i]
-                        item['short'] = shorts_list[i]
-                        item['star'] = star
+                        item = {'movie_id': self.id, 'movie_name': movie_name, 'user_name': user_names[i],
+                                'short': shorts_list[i], 'star': star}
                         self.info.append(item)
             else:
                 return None
