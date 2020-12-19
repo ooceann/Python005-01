@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}">
+    <title>Douban</title>
+</head>
+<body>
+<div class="main">
+    <div class="title">
+        <h2>{{movie_name}}</h2>
+    </div>
+    <!--    action 前面一定要加'/'-->
+    <form class="search" method="get" action="/search/">
+        <!--        {% csrf_token %}-->
+        <input type="text" name="search" placeholder="请输入关键词">
+        <button type="submit">搜索</button>
+    </form>
+
+    {% if error_msg %}
+    <p>{{ error_msg }}</p>
+    {% endif %}
+    <div class="shorts">
+        <div class="item-list">
+            {% for item in shorts_list %}
+            <div class="item">
+                <p>
+                    <span class="user-name">{{item.user_name}}</span> /
+                    <span class="star">{{item.star}}</span>
+                </p>
+
+                <p class="info">
+                    <span>{{item.info}}</span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if none_msg %}
+    <p>{{none_msg}}</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
